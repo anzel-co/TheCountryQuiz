@@ -11,7 +11,7 @@ const app = express()
 
 app.use(bodyParser.json())
 
-app.use(express.static(path.join('public')))
+app.use(express.static(path.join('build')))
 
 // app.use((req, res, next) => {
 //     res.setHeader('Access-Control-Allow-Origin', '*')
@@ -23,7 +23,7 @@ app.use(express.static(path.join('public')))
 app.use('/api', routes)
 
 app.use((req, res, next) => {
-    res.sendFile(path.resolve(__dirname, 'public', 'index.html'))
+    res.sendFile(path.resolve(__dirname, 'build', 'index.html'))
 })
 
 app.use((error ,req, res, next) => {
