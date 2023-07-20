@@ -50,5 +50,5 @@ if(date.getDate() === 1) reset()
 
 mongoose
     .connect(`mongodb+srv://${process.env.DATABASE_USER}:${process.env.DATABASE_PASSWORD}@thecountryquiz.4ngg8id.mongodb.net/${process.env.DATABASE}?retryWrites=true&w=majority`)
-    .then(() => app.listen(5000))
+    .then(() => app.listen(process.env.PORT || 5000))
     .catch()

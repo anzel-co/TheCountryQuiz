@@ -1,6 +1,6 @@
 {
-  "name": "the-country-quiz-1.0.3",
-  "version": "1.0.3",
+  "name": "the-country-quiz-1.0.4",
+  "version": "1.0.4",
   "description": "A gamified quiz about countries.",
   "main": "index.js",
   "scripts": {
