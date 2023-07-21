@@ -4,6 +4,12 @@ const jwt = require('jsonwebtoken')
 const HttpError = require('./http-error.js')
 const User = require('./model.js')
 
+const date = new Date()
+
+const month = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
+
 const getAllUsersLeaderboards = async (req, res, next) => {
     let allUsers
 
@@ -14,6 +20,26 @@ const getAllUsersLeaderboards = async (req, res, next) => {
     }
 
     res.json({users: allUsers})
+}
+
+const getEasyHighscores = async (req, res, next) => {
+    let allUsers
+
+    try {
+        allUsers = await User.find({}, 'name image easyhs ')
+    } catch (err) {
+        return next(new HttpError('Fetching data for users failed, try again later.', 500))
+    }
+
+    let users = allUsers.sort((a, b) => {
+        if (a.easyhs < b.easyhs) return 1
+        if (a.easyhs > b.easyhs) return -1
+        return 0
+    })
+
+    users.slice(0, 10)
+
+    res.json({users})
 }
 
 const searchUserProfile = async (req, res, next) => {
@@ -377,6 +403,7 @@ const buyItem = async (req, res, next) => {
 }
 
 exports.getAllUsersLeaderboards = getAllUsersLeaderboards
+exports.getEasyHighscores = getEasyHighscores
 exports.getUserProfile = getUserProfile
 exports.getUserInventory = getUserInventory
 exports.searchUserProfile = searchUserProfile

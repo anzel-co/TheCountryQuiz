@@ -9,6 +9,8 @@ const router = express.Router()
 
 router.get('/users', controller.getAllUsersLeaderboards)
 
+router.get('/users/easyhighscores', controller.getEasyHighscores)
+
 router.get('/users/search/:uname', controller.searchUserProfile)
 
 router.post('/register', [
